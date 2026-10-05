@@ -1,23 +1,16 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!--ajustar automaticamente o tamanho e o zoom da página-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>Corrêa's Coffee Lab - Cafeteria Artesanal</title>
-  <link rel="icon" type="image/x-icon" href="https://cdn-icons-png.flaticon.com/512/1114/1114350.png">
-  <!--Remove margens e paddings padrão. 
-    box-sizing: border-box; garante que as bordas e o padding não aumentem o tamanho total do elemento.-->
-  <!--header:Estiliza o cabeçalho fixo:
-    nav, .logo, .nav-links, .nav-links a
 
-Define o layout do menu e estilo dos links:
-
-Flexbox para alinhamento
-
-Espaçamento entre links
-
-Efeito hover com cor clara-->
+  <link
+    rel="icon"
+    type="image/x-icon"
+    href="https://cdn-icons-png.flaticon.com/512/1114/1114350.png"
+  >
 
   <style>
     * {
@@ -26,15 +19,21 @@ Efeito hover com cor clara-->
       box-sizing: border-box;
     }
 
+    html {
+      scroll-padding-top: 130px;
+      -webkit-text-size-adjust: 100%;
+    }
+
     body {
-      font-family: 'Georgia', serif;
+      font-family: Georgia, serif;
       line-height: 1.6;
       color: #333;
     }
-/* CABEÇALHO */
+
+    /* CABEÇALHO */
     header {
       background: linear-gradient(135deg, #d4945f 0%, #4d2b10 100%);
-      color: rgb(255, 255, 255);
+      color: white;
       padding: 1rem 0;
       position: sticky;
       top: 0;
@@ -51,6 +50,14 @@ Efeito hover com cor clara-->
       padding: 0 2rem;
     }
 
+    nav > *,
+    .logo,
+    .nav-links,
+    .menu-item,
+    .footer-section {
+      min-width: 0;
+    }
+
     .logo {
       font-size: 1.8rem;
       font-weight: bold;
@@ -64,6 +71,7 @@ Efeito hover com cor clara-->
     .logo-icon {
       width: 45px;
       height: 45px;
+      flex-shrink: 0;
       filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
     }
 
@@ -84,12 +92,16 @@ Efeito hover com cor clara-->
       color: #d4a574;
     }
 
+    /* BANNER PRINCIPAL */
     .hero {
-      background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
+      background:
+        linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
         url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><rect fill="%234a3728" width="1200" height="600"/><circle fill="%236b4423" cx="200" cy="150" r="80"/><circle fill="%236b4423" cx="600" cy="300" r="120"/><circle fill="%236b4423" cx="1000" cy="200" r="100"/></svg>');
+
       background-size: cover;
       background-position: center;
-      height: 500px;
+      min-height: 500px;
+      padding: 4rem 2rem;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -97,27 +109,81 @@ Efeito hover com cor clara-->
       color: white;
     }
 
+    .hero-content {
+      width: 100%;
+    }
+
     .hero-content h1 {
-      font-size: 3.5rem;
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      line-height: 1.2;
       margin-bottom: 1rem;
       text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
     }
 
     .hero-content p {
       font-size: 1.5rem;
+      margin-top: 1.5rem;
       text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
     }
 
+    /* SEÇÕES */
     .container {
       max-width: 1200px;
       margin: 0 auto;
       padding: 4rem 2rem;
     }
 
-    /* Faz o botão de cada card */
+    h2 {
+      text-align: center;
+      font-size: 2.5rem;
+      margin-bottom: 3rem;
+      color: #3d2817;
+    }
+
+    /* CARDÁPIO */
+    .menu-grid {
+      display: grid;
+      grid-template-columns:
+        repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+      gap: 2rem;
+    }
+
+    .menu-item {
+      background: white;
+      border-radius: 10px;
+      padding: 2rem;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s, box-shadow 0.3s;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .menu-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .menu-item h3 {
+      color: #6b4423;
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .menu-item p {
+      color: #666;
+      margin-bottom: 1rem;
+    }
+
+    .price {
+      color: #3d2817;
+      font-weight: bold;
+      font-size: 1.3rem;
+    }
+
     .btn-pedir {
       background-color: #6b4423;
-      color: #fff;
+      color: white;
       border: none;
       padding: 0.6rem 1.2rem;
       border-radius: 8px;
@@ -133,22 +199,111 @@ Efeito hover com cor clara-->
       transform: translateY(-2px);
     }
 
-    /* Faz o botão ficar no final de cada card */
-    .menu-item {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
+    /* SOBRE */
+    .about {
+      background: #f9f5f0;
     }
 
-    /* === POP-UP DE PEDIDO === */
+    .about-content {
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto;
+      font-size: 1.2rem;
+      line-height: 1.8;
+    }
+
+    /* RODAPÉ */
+    footer {
+      background: #3d2817;
+      color: white;
+      padding: 3rem 2rem;
+      margin-top: 4rem;
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns:
+        repeat(auto-fit, minmax(min(100%, 250px), 1fr));
+      gap: 2rem;
+    }
+
+    .footer-section h3 {
+      color: #d4a574;
+      margin-bottom: 1rem;
+    }
+
+    .footer-section p,
+    .footer-section a {
+      color: #ccc;
+      text-decoration: none;
+      display: block;
+      margin-bottom: 0.5rem;
+      overflow-wrap: anywhere;
+    }
+
+    .footer-section a:hover {
+      color: #d4a574;
+    }
+
+    .footer-bottom {
+      text-align: center;
+      margin-top: 2rem;
+      padding-top: 2rem;
+      border-top: 1px solid #555;
+      color: #999;
+    }
+
+    /* CARRINHO */
+    #carrinho-icone {
+      position: relative;
+      background: none;
+      color: white;
+      font-size: 1.5rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-left: 1.5rem;
+      transition: color 0.3s;
+    }
+
+    #carrinho-icone:hover {
+      color: #d4a574;
+    }
+
+    #carrinho-contador {
+      position: absolute;
+      top: -5px;
+      right: -10px;
+      background-color: #ff4d4d;
+      color: white;
+      border-radius: 50%;
+      padding: 2px 6px;
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    #lista-carrinho {
+      list-style: none;
+      margin-bottom: 1rem;
+    }
+
+    #lista-carrinho li {
+      padding: 0.5rem 0;
+      overflow-wrap: anywhere;
+    }
+
+    /* POP-UPS */
     .popup-overlay {
       display: none;
-      /* escondido por padrão */
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
+      padding: 1rem;
       background: rgba(0, 0, 0, 0.6);
       justify-content: center;
       align-items: center;
@@ -160,8 +315,10 @@ Efeito hover com cor clara-->
       padding: 2rem;
       border-radius: 12px;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-      width: 90%;
+      width: 100%;
       max-width: 400px;
+      max-height: calc(100dvh - 2rem);
+      overflow-y: auto;
       text-align: center;
       animation: fadeIn 0.3s ease;
     }
@@ -171,12 +328,10 @@ Efeito hover com cor clara-->
       color: #6b4423;
     }
 
-    /* Centraliza o label e o input */
     .popup label,
     .popup input {
       display: block;
       margin: 0 auto;
-      /* centraliza horizontalmente */
       text-align: center;
     }
 
@@ -192,6 +347,7 @@ Efeito hover com cor clara-->
 
     .popup-buttons {
       display: flex;
+      flex-wrap: wrap;
       justify-content: center;
       gap: 1rem;
     }
@@ -224,132 +380,133 @@ Efeito hover com cor clara-->
       }
     }
 
-    h2 {
-      text-align: center;
-      font-size: 2.5rem;
-      margin-bottom: 3rem;
-      color: #3d2817;
+    /* TABLETS E TELAS MENORES */
+    @media (max-width: 1000px) {
+      nav {
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      .logo {
+        align-items: center;
+        text-align: center;
+      }
+
+      .nav-links {
+        align-items: center;
+        justify-content: center;
+      }
     }
 
-    .menu-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 2rem;
-    }
+    /* CELULARES */
+    @media (max-width: 600px) {
+      header {
+        padding: 0.8rem 0;
+      }
 
-    .menu-item {
-      background: white;
-      border-radius: 10px;
-      padding: 2rem;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      transition: transform 0.3s, box-shadow 0.3s;
-    }
+      nav {
+        padding: 0 1rem;
+        gap: 0.7rem;
+      }
 
-    .menu-item:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-    }
+      .logo {
+        font-size: 1.05rem;
+        letter-spacing: 1px;
+        gap: 0.5rem;
+      }
 
-    .menu-item h3 {
-      color: #6b4423;
-      font-size: 1.5rem;
-      margin-bottom: 0.5rem;
-    }
+      .logo h5 {
+        font-size: inherit;
+        line-height: 1.3;
+      }
 
-    .menu-item p {
-      color: #666;
-      margin-bottom: 1rem;
-    }
+      .logo-icon {
+        width: 32px;
+        height: 32px;
+      }
 
-    .price {
-      color: #3d2817;
-      font-weight: bold;
-      font-size: 1.3rem;
-    }
+      .nav-links {
+        width: 100%;
+        gap: 0.75rem;
+        flex-wrap: wrap;
+      }
 
-    .about {
-      background: #f9f5f0;
-    }
+      .nav-links a {
+        font-size: 0.9rem;
+        display: inline-flex;
+        align-items: center;
+        min-height: 44px;
+      }
 
-    .about-content {
-      text-align: center;
-      max-width: 800px;
-      margin: 0 auto;
-      font-size: 1.2rem;
-      line-height: 1.8;
-    }
+      #carrinho-icone {
+        margin-left: 0.2rem;
+        font-size: 1.3rem;
+        min-height: 44px;
+      }
 
-    footer {
-      background: #3d2817;
-      color: white;
-      padding: 3rem 2rem;
-      margin-top: 4rem;
-    }
+      .hero {
+        min-height: 340px;
+        padding: 3rem 1.25rem;
+      }
 
-    .footer-content {
-      max-width: 1200px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 2rem;
-    }
+      .hero-content h1 {
+        font-size: clamp(1.8rem, 7.5vw, 2.5rem);
+      }
 
-    .footer-section h3 {
-      color: #d4a574;
-      margin-bottom: 1rem;
-    }
+      .hero-content p {
+        font-size: 1.1rem;
+        line-height: 1.5;
+        margin-top: 1.25rem;
+      }
 
-    .footer-section p,
-    .footer-section a {
-      color: #ccc;
-      text-decoration: none;
-      display: block;
-      margin-bottom: 0.5rem;
-    }
+      .container {
+        padding: 2.5rem 1.25rem;
+      }
 
-    .footer-section a:hover {
-      color: #d4a574;
-    }
+      h2 {
+        font-size: 1.9rem;
+        margin-bottom: 1.75rem;
+        line-height: 1.25;
+      }
 
-    .footer-bottom {
-      text-align: center;
-      margin-top: 2rem;
-      padding-top: 2rem;
-      border-top: 1px solid #555;
-      color: #999;
+      .menu-grid {
+        grid-template-columns: 1fr;
+        gap: 1.25rem;
+      }
 
+      .menu-item {
+        padding: 1.5rem;
+      }
 
-    }
+      .btn-pedir {
+        min-height: 44px;
+      }
 
-    /* Ícone de carrinho no menu */
-    #carrinho-icone {
-      position: relative;
-      background: none;
-      color: white;
-      font-size: 1.5rem;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-left: 1.5rem;
-      transition: color 0.3s;
-    }
+      .about-content {
+        font-size: 1rem;
+      }
 
-    #carrinho-icone:hover {
-      color: #d4a574;
-    }
+      footer {
+        padding: 2rem 1.25rem;
+        margin-top: 2rem;
+      }
 
-    /* Contador do carrinho */
-    #carrinho-contador {
-      position: absolute;
-      top: -5px;
-      right: -10px;
-      background-color: #ff4d4d;
-      color: white;
-      border-radius: 50%;
-      padding: 2px 6px;
-      font-size: 12px;
-      font-weight: bold;
+      .footer-content {
+        grid-template-columns: 1fr;
+      }
+
+      .popup {
+        padding: 1.5rem;
+      }
+
+      .popup-buttons {
+        gap: 0.75rem;
+      }
+
+      .popup-buttons button {
+        flex: 1 1 120px;
+        min-height: 44px;
+      }
     }
   </style>
 </head>
@@ -358,43 +515,78 @@ Efeito hover com cor clara-->
   <header>
     <nav>
       <div class="logo">
-        <svg class="logo-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-          <!-- Vapor com corações -->
-          <path d="M35,15 Q30,10 30,5 Q30,0 35,0 Q40,0 40,5 Q40,10 35,15" fill="none" stroke="#d4a574"
-            stroke-width="2" />
-          <path d="M50,15 Q45,10 45,5 Q45,0 50,0 Q55,0 55,5 Q55,10 50,15" fill="none" stroke="#d4a574"
-            stroke-width="2" />
-          <path d="M65,15 Q60,10 60,5 Q60,0 65,0 Q70,0 70,5 Q70,10 65,15" fill="none" stroke="#d4a574"
-            stroke-width="2" />
+        <svg
+          class="logo-icon"
+          viewBox="0 0 100 100"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M35,15 Q30,10 30,5 Q30,0 35,0 Q40,0 40,5 Q40,10 35,15"
+            fill="none"
+            stroke="#d4a574"
+            stroke-width="2"
+          />
 
-          <!-- Xícara -->
-          <path d="M20,35 Q20,30 25,30 L75,30 Q80,30 80,35 L75,75 Q75,80 70,80 L30,80 Q25,80 25,75 Z" fill="none"
-            stroke="white" stroke-width="3" />
+          <path
+            d="M50,15 Q45,10 45,5 Q45,0 50,0 Q55,0 55,5 Q55,10 50,15"
+            fill="none"
+            stroke="#d4a574"
+            stroke-width="2"
+          />
 
-          <!-- Alça -->
-          <path d="M80,40 Q95,40 95,55 Q95,65 85,65" fill="none" stroke="white" stroke-width="3" />
+          <path
+            d="M65,15 Q60,10 60,5 Q60,0 65,0 Q70,0 70,5 Q70,10 65,15"
+            fill="none"
+            stroke="#d4a574"
+            stroke-width="2"
+          />
 
-          <!-- Pires -->
-          <ellipse cx="50" cy="85" rx="35" ry="5" fill="none" stroke="white" stroke-width="2.5" />
+          <path
+            d="M20,35 Q20,30 25,30 L75,30 Q80,30 80,35 L75,75 Q75,80 70,80 L30,80 Q25,80 25,75 Z"
+            fill="none"
+            stroke="white"
+            stroke-width="3"
+          />
+
+          <path
+            d="M80,40 Q95,40 95,55 Q95,65 85,65"
+            fill="none"
+            stroke="white"
+            stroke-width="3"
+          />
+
+          <ellipse
+            cx="50"
+            cy="85"
+            rx="35"
+            ry="5"
+            fill="none"
+            stroke="white"
+            stroke-width="2.5"
+          />
         </svg>
+
         <h5>Corrêa's Coffee Lab</h5>
       </div>
+
       <ul class="nav-links">
         <li><a href="#home">Início</a></li>
         <li><a href="#cardapio">Cardápio</a></li>
         <li><a href="#sobre">Sobre</a></li>
         <li><a href="#contato">Contato</a></li>
-        <!-- Ícone do Carrinho -->
-        <div id="carrinho-icone">
-          🛒
-          <span id="carrinho-contador">0</span>
-        </div>
+
+        <li>
+          <div id="carrinho-icone">
+            🛒
+            <span id="carrinho-contador">0</span>
+          </div>
+        </li>
       </ul>
     </nav>
   </header>
 
   <section id="home" class="hero">
-    <div class="hero-content"> <!--Texto centralizado no meio da imagem.-->
+    <div class="hero-content">
       <h1>Corrêa's Coffee Lab - Cafeteria Artesanal</h1>
       <p>Café artesanal com amor e dedicação</p>
     </div>
@@ -402,37 +594,44 @@ Efeito hover com cor clara-->
 
   <section id="cardapio" class="container">
     <h2>Nosso Cardápio</h2>
-    <div class="menu-grid"> <!--Grade com os itens do cardápio, usando layout em colunas.-->
+
+    <div class="menu-grid">
       <div class="menu-item" data-name="Expresso" data-price="6,00">
         <h3>Expresso</h3>
         <p>Café expresso tradicional italiano, intenso e encorpado</p>
-        <span class="price">R$ 6,00</span> <br>
+        <span class="price">R$ 6,00</span>
+        <br>
         <button class="btn-pedir">Pedir Agora</button>
       </div>
+
       <div class="menu-item" data-name="Cappuccino" data-price="12.00">
         <h3>Cappuccino</h3>
         <p>Espresso com leite vaporizado e espuma cremosa.</p>
         <span class="price">R$ 12,00</span>
         <button class="btn-pedir">Pedir Agora</button>
       </div>
+
       <div class="menu-item" data-name="Café Latte" data-price="12,00">
         <h3>Café Latte</h3>
         <p>Expresso suave com bastante leite cremoso</p>
         <span class="price">R$ 12,00</span>
         <button class="btn-pedir">Pedir Agora</button>
       </div>
+
       <div class="menu-item" data-name="Mocha" data-price="14,00">
         <h3>Mocha</h3>
         <p>Expresso com chocolate e leite vaporizado</p>
         <span class="price">R$ 14,00</span>
         <button class="btn-pedir">Pedir Agora</button>
       </div>
+
       <div class="menu-item" data-name="Croissant" data-price="8,00">
         <h3>Croissant</h3>
         <p>Croissant francês artesanal e crocante</p>
         <span class="price">R$ 8,00</span>
         <button class="btn-pedir">Pedir Agora</button>
       </div>
+
       <div class="menu-item" data-name="Bolo de Cenoura" data-price="9,00">
         <h3>Bolo de Cenoura</h3>
         <p>Fatia generosa de bolo caseiro com cobertura de chocolate</p>
@@ -445,30 +644,35 @@ Efeito hover com cor clara-->
   <section id="sobre" class="about">
     <div class="container">
       <h2>Sobre Nós</h2>
+
       <div class="about-content">
         <p>
-          A Corrêa's Coffee Lab nasceu da paixão por café de qualidade e momentos especiais.
-          Selecionamos os melhores grãos e preparamos cada xícara com dedicação e carinho.
-          Nosso ambiente acolhedor é perfeito para um encontro com amigos,
-          uma pausa no trabalho ou simplesmente para apreciar um excelente café.
+          A Corrêa's Coffee Lab nasceu da paixão por café de qualidade
+          e momentos especiais. Selecionamos os melhores grãos e
+          preparamos cada xícara com dedicação e carinho.
+          Nosso ambiente acolhedor é perfeito para um encontro
+          com amigos, uma pausa no trabalho ou simplesmente
+          para apreciar um excelente café.
         </p>
       </div>
     </div>
   </section>
 
-  <footer id="contato"> <!--Rodapé da página com informações de contato, endereço e horário de funcionamento.-->
+  <footer id="contato">
     <div class="footer-content">
       <div class="footer-section">
         <h3>Contato</h3>
         <p>📞 (21) 99999-9999</p>
         <p>✉️ contato@corrêascoffeelab.com.br</p>
       </div>
+
       <div class="footer-section">
         <h3>Endereço</h3>
         <p>Rua do Café, 123</p>
         <p>Centro - Rio de Janeiro, RJ</p>
         <p>CEP: 20000-000</p>
       </div>
+
       <div class="footer-section">
         <h3>Horário</h3>
         <p>Segunda a Sexta: 7h - 20h</p>
@@ -476,29 +680,40 @@ Efeito hover com cor clara-->
         <p>Domingo: 9h - 18h</p>
       </div>
     </div>
-    <div class="footer-bottom"> <!--Copyright:-->
-      <p>&copy; 2025 Corrêa's Coffee Lab. Todos os direitos reservados.</p>
+
+    <div class="footer-bottom">
+      <p>© 2025 Corrêa's Coffee Lab. Todos os direitos reservados.</p>
     </div>
   </footer>
 
-  <!-- Pop-up do pedido -->
+  <!-- POP-UP DO PEDIDO -->
   <div id="pedido-popup" class="popup-overlay">
     <div class="popup">
       <h3 id="popup-item-nome">Item</h3>
+
       <label for="quantidade">Quantidade:</label>
       <input type="number" id="quantidade" min="1" value="1">
+
       <div class="popup-buttons">
         <button id="confirmar-btn">Confirmar Pedido</button>
         <button id="cancelar-btn">Cancelar</button>
       </div>
     </div>
   </div>
-  <!-- Pop-up do Carrinho -->
+
+  <!-- POP-UP DO CARRINHO -->
   <div id="carrinho-popup" class="popup-overlay">
     <div class="popup">
       <h3>🛍️ Seu Carrinho</h3>
+
       <ul id="lista-carrinho"></ul>
-      <p><strong>Total: R$ <span id="total-carrinho">0.00</span></strong></p>
+
+      <p>
+        <strong>
+          Total: R$ <span id="total-carrinho">0.00</span>
+        </strong>
+      </p>
+
       <div class="popup-buttons">
         <button id="finalizar-btn">Finalizar Pedido</button>
         <button id="fechar-carrinho">Fechar</button>
@@ -523,12 +738,15 @@ Efeito hover com cor clara-->
     let carrinho = [];
     let currentItem = null;
 
-    // 🧁 Abrir pop-up e guardar dados
+    // Abrir pop-up do produto
     document.querySelectorAll(".btn-pedir").forEach(botao => {
       botao.addEventListener("click", () => {
         const itemDiv = botao.closest(".menu-item");
+
         const nome = itemDiv.dataset.name;
-        const preco = parseFloat(itemDiv.dataset.price);
+        const preco = parseFloat(
+          itemDiv.dataset.price.replace(",", ".")
+        );
 
         currentItem = { nome, preco };
         itemNome.textContent = nome;
@@ -537,46 +755,62 @@ Efeito hover com cor clara-->
       });
     });
 
-    // ❌ Cancelar
+    // Cancelar pedido
     cancelarBtn.addEventListener("click", () => {
       popup.style.display = "none";
       currentItem = null;
     });
 
-    // ✅ Confirmar pedido
+    // Confirmar quantidade e adicionar ao carrinho
     confirmarBtn.addEventListener("click", () => {
       if (!currentItem) return;
-      const qtd = parseInt(quantidadeInput.value) || 1;
-      adicionarAoCarrinho(currentItem.nome, currentItem.preco, qtd);
+
+      const qtd = Math.max(
+        1,
+        parseInt(quantidadeInput.value, 10) || 1
+      );
+
+      adicionarAoCarrinho(
+        currentItem.nome,
+        currentItem.preco,
+        qtd
+      );
+
       popup.style.display = "none";
       currentItem = null;
     });
 
-    // ➕ Adicionar ao carrinho
     function adicionarAoCarrinho(nome, preco, quantidade) {
-      const existente = carrinho.find(i => i.nome === nome);
+      const existente = carrinho.find(item => item.nome === nome);
+
       if (existente) {
         existente.quantidade += quantidade;
       } else {
         carrinho.push({ nome, preco, quantidade });
       }
+
       atualizarCarrinho();
     }
 
-    // 🔄 Atualizar lista e total
     function atualizarCarrinho() {
       listaCarrinho.innerHTML = "";
-      let total = 0, totalItens = 0;
+
+      let total = 0;
+      let totalItens = 0;
 
       carrinho.forEach((item, i) => {
-        total += item.preco * item.quantidade;
+        const subtotal = item.preco * item.quantidade;
+
+        total += subtotal;
         totalItens += item.quantidade;
 
         const li = document.createElement("li");
+
         li.innerHTML = `
-        ${item.quantidade}x ${item.nome} - R$ ${(item.preco * item.quantidade).toFixed(2)}
-        <button onclick="removerItem(${i})">✖</button>
-      `;
+          ${item.quantidade}x ${item.nome} - R$ ${subtotal.toFixed(2)}
+          <button onclick="removerItem(${i})">✖</button>
+        `;
+
         listaCarrinho.appendChild(li);
       });
 
@@ -584,21 +818,22 @@ Efeito hover com cor clara-->
       carrinhoContador.textContent = totalItens;
     }
 
-    // 🗑️ Remover item
     function removerItem(i) {
       carrinho.splice(i, 1);
       atualizarCarrinho();
     }
 
-    // 🛒 Abrir/fechar carrinho
+    // Abrir carrinho
     carrinhoIcone.addEventListener("click", () => {
       carrinhoPopup.style.display = "flex";
     });
+
+    // Fechar carrinho
     fecharCarrinho.addEventListener("click", () => {
       carrinhoPopup.style.display = "none";
     });
 
-    // ✉️ Finalizar pedido (WhatsApp)
+    // Finalizar pedido pelo WhatsApp
     document.getElementById("finalizar-btn").addEventListener("click", () => {
       if (carrinho.length === 0) {
         alert("Seu carrinho está vazio!");
@@ -606,35 +841,36 @@ Efeito hover com cor clara-->
       }
 
       let msg = "☕ *Pedido Corrêa's Coffee Lab*%0A";
+
       carrinho.forEach(item => {
-        msg += `• ${item.quantidade}x ${item.nome} - R$ ${(item.preco * item.quantidade).toFixed(2)}%0A`;
+        const subtotal = item.preco * item.quantidade;
+
+        msg += `• ${item.quantidade}x ${item.nome} - R$ ${subtotal.toFixed(2)}%0A`;
       });
+
       msg += `%0ATotal: *R$ ${totalCarrinho.textContent}*%0A%0AObrigada pelo pedido! ❤️`;
 
-      const telefone = "0000000000"; // <- coloque o número da cafeteria
-      window.open(`https://wa.me/${telefone}?text=${msg}`, "_blank");
+      // Coloque aqui o WhatsApp da cafeteria: 55 + DDD + número
+      const telefone = "0000000000";
+
+      window.open(
+        `https://wa.me/${telefone}?text=${msg}`,
+        "_blank"
+      );
 
       carrinho = [];
       atualizarCarrinho();
       carrinhoPopup.style.display = "none";
     });
 
-    // Fechar pop-ups clicando fora
-    document.querySelectorAll(".popup-overlay").forEach(p => {
-      p.addEventListener("click", e => {
-        if (e.target === p) p.style.display = "none";
+    // Fechar pop-ups ao clicar fora
+    document.querySelectorAll(".popup-overlay").forEach(overlay => {
+      overlay.addEventListener("click", evento => {
+        if (evento.target === overlay) {
+          overlay.style.display = "none";
+        }
       });
     });
   </script>
 </body>
-
 </html>
-<!--footer
-
-Rodapé com fundo escuro:
-
-Divide em colunas usando grid
-
-Texto claro
-
-Destaque dourado nos títulos-->
